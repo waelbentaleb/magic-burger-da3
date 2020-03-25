@@ -10,13 +10,15 @@ const buildControls = (props) => {
     ingredientsControl.push(
       <BuildControl
         label={item.label}
-        addIngredient={() => { props.addIngredient(item.id) }} />
+        addIngredient={() => { props.addIngredient(item.id) }}
+        removeIngredient={() => { props.removeIngredient(item.id) }}
+        disableRemoving={item.count === 0} />
     )
   }
 
   return (
     <div className={classes.BuildControls}>
-      <p>Current Price : 4 TND</p>
+      <p>Current Price : {props.totalPrice} DT</p>
       {ingredientsControl}
       <button className={classes.OrderButton} >Order Now</button>
     </div>

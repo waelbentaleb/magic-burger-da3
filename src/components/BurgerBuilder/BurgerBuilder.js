@@ -9,37 +9,62 @@ class BurgerBuilder extends Component {
       {
         id: "aze",
         label: 'Salad',
-        count: 1
+        count: 0,
+        price: 1
       },
       {
         id: "sqa",
         label: 'Cheese',
-        count: 2
+        count: 0,
+        price: 1.5
       },
       {
         id: "dez",
         label: 'Meat',
-        count: 0
+        count: 0,
+        price: 3
       },
       {
         id: "gtq",
         label: 'Escalope',
-        count: 1
+        count: 0,
+        price: 2.3
       }
-    ]
+    ],
+    totalPrice: 4
   }
 
   addIngredientHandler = (id) => {
     let newIngredient = [...this.state.ingredients]
+    let newTotalPrice = this.state.totalPrice
 
     const index = newIngredient.findIndex((item) => {
       return item.id === id
     })
 
     newIngredient[index].count++
+    newTotalPrice += newIngredient[index].price
 
     this.setState({
-      ingredients: newIngredient
+      ingredients: newIngredient,
+      totalPrice: newTotalPrice
+    })
+  }
+
+  removeIngredientHandler = (id) => {
+    let newIngredient = [...this.state.ingredients]
+    let newTotalPrice = this.state.totalPrice
+
+    const index = newIngredient.findIndex((item) => {
+      return item.id === id
+    })
+
+    newIngredient[index].count--
+    newTotalPrice -= newIngredient[index].price
+
+    this.setState({
+      ingredients: newIngredient,
+      totalPrice: newTotalPrice
     })
   }
 
@@ -49,7 +74,9 @@ class BurgerBuilder extends Component {
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           ingredients={this.state.ingredients}
-          addIngredient={this.addIngredientHandler} />
+          addIngredient={this.addIngredientHandler}
+          removeIngredient={this.removeIngredientHandler}
+          totalPrice={this.state.totalPrice} />
       </div>
     )
   }

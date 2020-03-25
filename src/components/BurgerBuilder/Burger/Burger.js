@@ -14,9 +14,15 @@ const burger = (props) => {
     }
   }
 
+  let message = null
+
+  if (list.length === 0)
+    message = <p>Please Start Adding Ingredients !!</p>
+
   return (
     <div className={classes.Burger}>
       <Ingredient type="BreadTop" />
+      {message}
       {list}
       <Ingredient type="BreadBottom" />
     </div>
