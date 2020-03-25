@@ -9,6 +9,7 @@ const buildControls = (props) => {
   for (let item of props.ingredients) {
     ingredientsControl.push(
       <BuildControl
+        key={item.id}
         label={item.label}
         addIngredient={() => { props.addIngredient(item.id) }}
         removeIngredient={() => { props.removeIngredient(item.id) }}

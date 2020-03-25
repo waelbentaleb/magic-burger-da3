@@ -17,7 +17,7 @@ const burger = (props) => {
   let message = null
 
   if (list.length === 0)
-    message = <p>Please Start Adding Ingredients !!</p>
+    message = <p>Please start adding ingredients !!</p>
 
   return (
     <div className={classes.Burger}>
