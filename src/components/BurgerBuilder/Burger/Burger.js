@@ -2,33 +2,22 @@ import React from 'react'
 import classes from './Burger.module.css'
 import Ingredient from './Ingredient/Ingredient'
 
-const burger = () => {
+const burger = (props) => {
 
-  // let ingredients = [
-  //   {
-  //     label: 'Salad',
-  //     count: 1
-  //   },
-  //   {
-  //     label: 'Cheese',
-  //     count: 2
-  //   },
-  //   {
-  //     label: 'Meat',
-  //     count: 1
-  //   },
-  //   {
-  //     label: 'Escalope',
-  //     count: 0
-  //   }
-  // ]
+  let list = []
 
-  // let list = 
+  for (let item of props.ingredients) {
+    for (let i = 0; i < item.count; i++) {
+      list.push(
+        <Ingredient type={item.label} key={item.id + '_' + i} />
+      )
+    }
+  }
 
   return (
     <div className={classes.Burger}>
       <Ingredient type="BreadTop" />
-      {/* {list} */}
+      {list}
       <Ingredient type="BreadBottom" />
     </div>
   )
