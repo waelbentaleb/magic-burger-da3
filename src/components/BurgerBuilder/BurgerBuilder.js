@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Burger from './Burger/Burger'
 import BuildControls from './BuildControls/BuildControls'
+import Modal from './Modal/Modal'
+import OrderSummary from './OrderSummary/OrderSummary'
 
 class BurgerBuilder extends Component {
 
@@ -31,7 +33,8 @@ class BurgerBuilder extends Component {
         price: 2.3
       }
     ],
-    totalPrice: 4
+    totalPrice: 4,
+    showModal: false
   }
 
   addIngredientHandler = (id) => {
@@ -68,15 +71,35 @@ class BurgerBuilder extends Component {
     })
   }
 
+  showOrHideModalHandler = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    })
+  }
+
   render() {
     return (
       <div>
         <Burger ingredients={this.state.ingredients} />
+
         <BuildControls
           ingredients={this.state.ingredients}
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
-          totalPrice={this.state.totalPrice} />
+          totalPrice={this.state.totalPrice}
+          showOrHideModal={this.showOrHideModalHandler}
+        />
+
+        <Modal
+          shouldShow={this.state.showModal}
+          showOrHideModal={this.showOrHideModalHandler}
+        >
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            totalPrice={this.state.totalPrice}
+            showOrHideModal={this.showOrHideModalHandler}
+          />
+        </Modal>
       </div>
     )
   }
