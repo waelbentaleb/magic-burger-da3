@@ -17,6 +17,8 @@ const buildControls = (props) => {
     )
   }
 
+  console.log('[BuildControls.js] rendering');
+
   return (
     <div className={classes.BuildControls}>
       <p>Current Price : {props.totalPrice.toFixed(2)} DT</p>

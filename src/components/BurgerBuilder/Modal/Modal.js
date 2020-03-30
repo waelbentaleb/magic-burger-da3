@@ -3,6 +3,8 @@ import classes from './Modal.module.css'
 
 const modal = (props) => {
 
+  console.log('[Modal.js] rendering');
+
   return (
     <div>
 

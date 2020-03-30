@@ -19,6 +19,8 @@ const burger = (props) => {
   if (list.length === 0)
     message = <p>Please start adding ingredients !!</p>
 
+  console.log('[Burger.js] rendering');
+
   return (
     <div className={classes.Burger}>
       <Ingredient type="BreadTop" />

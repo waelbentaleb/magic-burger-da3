@@ -6,36 +6,42 @@ import OrderSummary from './OrderSummary/OrderSummary'
 
 class BurgerBuilder extends Component {
 
-  state = {
-    ingredients: [
-      {
-        id: "aze",
-        label: 'Salad',
-        count: 0,
-        price: 1
-      },
-      {
-        id: "sqa",
-        label: 'Cheese',
-        count: 0,
-        price: 1.5
-      },
-      {
-        id: "dez",
-        label: 'Meat',
-        count: 0,
-        price: 3
-      },
-      {
-        id: "gtq",
-        label: 'Escalope',
-        count: 0,
-        price: 2.3
-      }
-    ],
-    totalPrice: 4,
-    showModal: false
+  constructor(props) {
+    console.log('[BurgerBuilder.js] constructor');
+
+    super(props)
+    this.state = {
+      ingredients: [
+        {
+          id: "aze",
+          label: 'Salad',
+          count: 0,
+          price: 1
+        },
+        {
+          id: "sqa",
+          label: 'Cheese',
+          count: 0,
+          price: 1.5
+        },
+        {
+          id: "dez",
+          label: 'Meat',
+          count: 0,
+          price: 3
+        },
+        {
+          id: "gtq",
+          label: 'Escalope',
+          count: 0,
+          price: 2.3
+        }
+      ],
+      totalPrice: 4,
+      showModal: false
+    }
   }
+
 
   addIngredientHandler = (id) => {
     let newIngredient = [...this.state.ingredients]
@@ -77,7 +83,13 @@ class BurgerBuilder extends Component {
     })
   }
 
+  componentDidMount = () => {
+    console.log('[BurgerBuilder.js] componentDidMount');
+  }
+
   render() {
+    console.log('[BurgerBuilder.js] render');
+
     return (
       <div>
         <Burger ingredients={this.state.ingredients} />

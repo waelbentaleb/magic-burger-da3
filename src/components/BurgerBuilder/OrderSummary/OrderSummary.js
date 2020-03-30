@@ -12,7 +12,7 @@ const orderSummary = (props) => {
   // }
 
   let listOfIngredients = props.ingredients.map((ingredient) => {
-    return <li>{ingredient.label}: {ingredient.count}</li>
+    return <li key={ingredient.id}>{ingredient.label}: {ingredient.count}</li>
   })
 
   return (
