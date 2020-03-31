@@ -1,34 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
 import classes from './Burger.module.css'
 import Ingredient from './Ingredient/Ingredient'
 
-const burger = (props) => {
+class Burger extends Component {
 
-  let list = []
-
-  for (let item of props.ingredients) {
-    for (let i = 0; i < item.count; i++) {
-      list.push(
-        <Ingredient type={item.label} key={item.id + '_' + i} />
-      )
-    }
+  shouldComponentUpdate = (nextProp, nextState) => {
+    console.log('[Burger.js] shouldComponentUpdate')
+    return true;
   }
 
-  let message = null
+  componentDidUpdate = () => {
+    console.log('[Burger.js] componentDidUpdate')
+  }
 
-  if (list.length === 0)
-    message = <p>Please start adding ingredients !!</p>
+  render() {
+    console.log('[Burger.js] rendering');
 
-  console.log('[Burger.js] rendering');
+    let list = []
 
-  return (
-    <div className={classes.Burger}>
-      <Ingredient type="BreadTop" />
-      {message}
-      {list}
-      <Ingredient type="BreadBottom" />
-    </div>
-  )
+    for (let item of this.props.ingredients) {
+      for (let i = 0; i < item.count; i++) {
+        list.push(
+          <Ingredient type={item.label} key={item.id + '_' + i} />
+        )
+      }
+    }
+
+    let message = null
+
+    if (list.length === 0)
+      message = <p>Please start adding ingredients !!</p>
+
+    return (
+      <div className={classes.Burger}>
+        <Ingredient type="BreadTop" />
+        {message}
+        {list}
+        <Ingredient type="BreadBottom" />
+      </div>
+    )
+  }
 }
 
-export default burger
+export default Burger

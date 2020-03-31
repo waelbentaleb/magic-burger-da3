@@ -3,6 +3,8 @@ import classes from './Ingredient.module.css'
 
 const ingredient = (props) => {
 
+  console.log('[Ingredient.js] rendering');
+
   let item
 
   switch (props.type) {

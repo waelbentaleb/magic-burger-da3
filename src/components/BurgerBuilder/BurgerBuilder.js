@@ -87,6 +87,15 @@ class BurgerBuilder extends Component {
     console.log('[BurgerBuilder.js] componentDidMount');
   }
 
+  shouldComponentUpdate = (nextProp, nextState) => {
+    console.log('[BurgerBuilder.js] shouldComponentUpdate')
+    return true;
+  }
+
+  componentDidUpdate = () => {
+    console.log('[BurgerBuilder.js] componentDidUpdate')
+  }
+
   render() {
     console.log('[BurgerBuilder.js] render');
 
