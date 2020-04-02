@@ -19,7 +19,7 @@ const modal = (props) => {
         className={classes.Modal}
         style={{
           // opacity: props.shouldShow ? 1 : 0
-          transform: props.shouldShow ? 'translateY(0)' : 'translateY(-100vh)'
+          transform: props.shouldShow ? 'translateY(0)' : 'translateY(-200vh)'
         }}
       >
         {props.children}

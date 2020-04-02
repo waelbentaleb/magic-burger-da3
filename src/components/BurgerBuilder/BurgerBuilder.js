@@ -3,6 +3,7 @@ import Burger from './Burger/Burger'
 import BuildControls from './BuildControls/BuildControls'
 import Modal from './Modal/Modal'
 import OrderSummary from './OrderSummary/OrderSummary'
+import axios from 'axios'
 
 class BurgerBuilder extends Component {
 
@@ -11,32 +12,7 @@ class BurgerBuilder extends Component {
 
     super(props)
     this.state = {
-      ingredients: [
-        {
-          id: "aze",
-          label: 'Salad',
-          count: 0,
-          price: 1
-        },
-        {
-          id: "sqa",
-          label: 'Cheese',
-          count: 0,
-          price: 1.5
-        },
-        {
-          id: "dez",
-          label: 'Meat',
-          count: 0,
-          price: 3
-        },
-        {
-          id: "gtq",
-          label: 'Escalope',
-          count: 0,
-          price: 2.3
-        }
-      ],
+      ingredients: [],
       totalPrice: 4,
       showModal: false
     }
@@ -85,6 +61,15 @@ class BurgerBuilder extends Component {
 
   componentDidMount = () => {
     console.log('[BurgerBuilder.js] componentDidMount');
+
+    axios.get('http://51.75.20.206:3100/ingredients').then((response) => {
+      console.log(response);
+      this.setState({
+        ingredients: response.data.ingredients
+      })
+    })
+
+
   }
 
   shouldComponentUpdate = (nextProp, nextState) => {
