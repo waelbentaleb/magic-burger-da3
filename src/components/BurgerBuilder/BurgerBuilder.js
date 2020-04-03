@@ -4,6 +4,7 @@ import BuildControls from './BuildControls/BuildControls'
 import Modal from './Modal/Modal'
 import OrderSummary from './OrderSummary/OrderSummary'
 import axios from 'axios'
+import loadingGif from '../../assets/images/loading.gif'
 
 class BurgerBuilder extends Component {
 
@@ -14,7 +15,9 @@ class BurgerBuilder extends Component {
     this.state = {
       ingredients: [],
       totalPrice: 4,
-      showModal: false
+      showModal: true,
+      isLoading: true,
+      errorMessage: ''
     }
   }
 
@@ -62,13 +65,23 @@ class BurgerBuilder extends Component {
   componentDidMount = () => {
     console.log('[BurgerBuilder.js] componentDidMount');
 
-    axios.get('http://51.75.20.206:3100/ingredients').then((response) => {
-      console.log(response);
-      this.setState({
-        ingredients: response.data.ingredients
-      })
-    })
+    // let x = 5;
 
+    axios.get('http://51.75.20.206:3100/ingredents')
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          ingredients: response.data.ingredients,
+          showModal: false,
+          isLoading: false
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          errorMessage: 'Somthing went wrong: ' + error.message
+        })
+      })
 
   }
 
@@ -83,6 +96,30 @@ class BurgerBuilder extends Component {
 
   render() {
     console.log('[BurgerBuilder.js] render');
+
+    let modalContent = null
+
+    if (this.state.isLoading) {
+      modalContent = (
+        <div>
+          <div style={{ display: 'flex' }}>
+            <h3 style={{ width: '80%' }}>Fetching data from the server ..</h3>
+            <img
+              style={{ width: '60px', height: '60px' }}
+              src={loadingGif} alt='laoding' />
+          </div>
+          <div>{this.state.errorMessage}</div>
+        </div>
+      )
+    } else {
+      modalContent = (
+        <OrderSummary
+          ingredients={this.state.ingredients}
+          totalPrice={this.state.totalPrice}
+          showOrHideModal={this.showOrHideModalHandler}
+        />
+      )
+    }
 
     return (
       <div>
@@ -100,11 +137,7 @@ class BurgerBuilder extends Component {
           shouldShow={this.state.showModal}
           showOrHideModal={this.showOrHideModalHandler}
         >
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            totalPrice={this.state.totalPrice}
-            showOrHideModal={this.showOrHideModalHandler}
-          />
+          {modalContent}
         </Modal>
       </div>
     )
