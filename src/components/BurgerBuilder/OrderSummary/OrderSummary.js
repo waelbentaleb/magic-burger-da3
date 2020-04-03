@@ -32,7 +32,12 @@ const orderSummary = (props) => {
         Cancel
       </button>
 
-      <button className={classes.Button + ' ' + classes.Success}>Continue</button>
+      <button
+        className={classes.Button + ' ' + classes.Success}
+        onClick={props.sendOrder}
+      >
+        Continue
+      </button>
     </div>
   )
 }

@@ -62,12 +62,30 @@ class BurgerBuilder extends Component {
     })
   }
 
+  sendOrderHandler = () => {
+    axios.post('http://51.75.20.206:3100/burger', {
+      burger: this.state.ingredients
+    })
+      .then((response) => {
+        console.log(response);
+
+        this.setState({
+          showModal: false
+        })
+
+      })
+      .catch((error) => {
+        console.log(error);
+
+      })
+  }
+
   componentDidMount = () => {
     console.log('[BurgerBuilder.js] componentDidMount');
 
     // let x = 5;
 
-    axios.get('http://51.75.20.206:3100/ingredents')
+    axios.get('http://51.75.20.206:3100/ingredients')
       .then((response) => {
         console.log(response);
         this.setState({
@@ -117,6 +135,7 @@ class BurgerBuilder extends Component {
           ingredients={this.state.ingredients}
           totalPrice={this.state.totalPrice}
           showOrHideModal={this.showOrHideModalHandler}
+          sendOrder={this.sendOrderHandler}
         />
       )
     }
