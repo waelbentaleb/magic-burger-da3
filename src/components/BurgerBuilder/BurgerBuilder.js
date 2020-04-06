@@ -63,6 +63,10 @@ class BurgerBuilder extends Component {
   }
 
   sendOrderHandler = () => {
+    this.setState({
+      isLoading: true
+    })
+
     axios.post('http://51.75.20.206:3100/burger', {
       burger: this.state.ingredients
     })
@@ -70,13 +74,17 @@ class BurgerBuilder extends Component {
         console.log(response);
 
         this.setState({
-          showModal: false
+          showModal: false,
+          isLoading: false
         })
 
       })
       .catch((error) => {
         console.log(error);
 
+        this.setState({
+          errorMessage: 'Somthing went wrong: ' + error.message
+        })
       })
   }
 
