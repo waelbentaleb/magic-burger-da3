@@ -67,7 +67,7 @@ class BurgerBuilder extends Component {
       isLoading: true
     })
 
-    axios.post('https://magicburger.ditraacademy.com/burger', {
+    axios.post('https://api.magicburger.ditraacademy.com/burger', {
       burger: this.state.ingredients
     })
       .then((response) => {
@@ -93,7 +93,7 @@ class BurgerBuilder extends Component {
 
     // let x = 5;
 
-    axios.get('https://magicburger.ditraacademy.com/ingredients')
+    axios.get('https://api.magicburger.ditraacademy.com/ingredients')
       .then((response) => {
         console.log(response);
         this.setState({

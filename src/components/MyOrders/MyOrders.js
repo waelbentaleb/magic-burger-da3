@@ -12,7 +12,7 @@ class Authentication extends Component {
 
   componentDidMount = () => {
 
-    axios.get('https://magicburger.ditraacademy.com/orders')
+    axios.get('https://api.magicburger.ditraacademy.com/orders')
       .then((response) => {
         console.log(response);
 
